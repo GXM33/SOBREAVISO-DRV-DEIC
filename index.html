@@ -308,11 +308,11 @@
                 <select id="person-select" onchange="searchByPerson()">
                     <option value="">-- Escolha uma pessoa --</option>
                     <option>Insp. Acauã</option>
-                    <option>Esc. Anderson Saraiva</option>
                     <option>Insp. Alexandre Brozoza</option>
+                    <option>Esc. Anderson Saraiva</option>
                     <option>Esc. Cátia Fortunato</option>
-                    <option>Insp. Cristiano Soletti</option>
                     <option>Esc. César da Costa</option>
+                    <option>Insp. Cristiano Soletti</option>
                     <option>Esc. Dagoberto O. das Virgens</option>
                     <option>Insp. Edmilson Melo</option>
                     <option>Insp. Edna Moraes</option>
@@ -321,12 +321,12 @@
                     <option>Esc. Jefferson Antoniol</option>
                     <option>Insp. Juliana Tremper</option>
                     <option>Insp. Juliano Bonacina</option>
-                    <option>Esc. Luciana Bortoli</option>
                     <option>Insp. Lucas Loss</option>
+                    <option>Esc. Luciana Bortoli</option>
                     <option>Insp. Tais Boesing</option>
                     <option>Insp. Teresinha Carivali</option>
-                    <option>Insp. Thiago Meireles</option>
                     <option>Insp. Thássia Guterres</option>
+                    <option>Insp. Thiago Meireles</option>
                     <option>Insp. Vanessa Trindade</option>
                 </select>
             </div>
@@ -513,36 +513,50 @@
 
         const peopleShortMap = {
             "Insp. Acauã": "Cau",
-            "Esc. Fernanda Piazza": "Piazza",
-            "Insp. Cristiano Soletti": "Cristiano",
-            "Insp. Teresinha Carivali": "Teresinha",
-            "Insp. Thiago Meireles": "Thiago",
-            "Esc. César da Costa": "César",
-            "Insp. Vanessa Trindade": "Vanessa",
-            "Insp. Juliano Bonacina": "Bona",
-            "Insp. Guilherme Mello": "Gui Mello",
-            "Insp. Tais Boesing": "Tais",
-            "Esc. Jefferson Antoniol": "Jeff",
-            "Esc. Luciana Bortoli": "Luciana",
-            "Insp. Edna Moraes": "Edna",
-            "Esc. Anderson Saraiva": "Saraiva",
-            "Insp. Lucas Loss": "Loss",
             "Insp. Alexandre Brozoza": "Brozoza",
-            "Esc. Dagoberto O. das Virgens": "Dago",
-            "Insp. Thássia Guterres": "Thássia",
-            "Insp. Juliana Tremper": "Juliana",
+            "Esc. Anderson Saraiva": "Saraiva",
             "Esc. Cátia Fortunato": "Cátia",
-            "Insp. Edmilson Melo": "Melo"
+            "Esc. César da Costa": "César",
+            "Insp. Cristiano Soletti": "Cristiano",
+            "Esc. Dagoberto O. das Virgens": "Dago",
+            "Insp. Edmilson Melo": "Melo",
+            "Insp. Edna Moraes": "Edna",
+            "Esc. Fernanda Piazza": "Piazza",
+            "Insp. Guilherme Mello": "Gui Mello",
+            "Esc. Jefferson Antoniol": "Jeff",
+            "Insp. Juliana Tremper": "Juliana",
+            "Insp. Juliano Bonacina": "Bona",
+            "Insp. Lucas Loss": "Loss",
+            "Esc. Luciana Bortoli": "Luciana",
+            "Insp. Tais Boesing": "Tais",
+            "Insp. Teresinha Carivali": "Teresinha",
+            "Insp. Thássia Guterres": "Thássia",
+            "Insp. Thiago Meireles": "Thiago",
+            "Insp. Vanessa Trindade": "Vanessa"
         };
 
         const allPeople = [
-            "Insp. Acauã", "Esc. Anderson Saraiva", "Insp. Alexandre Brozoza",
-            "Esc. Cátia Fortunato", "Insp. Cristiano Soletti", "Esc. César da Costa",
-            "Esc. Dagoberto O. das Virgens", "Insp. Edmilson Melo", "Insp. Edna Moraes",
-            "Esc. Fernanda Piazza", "Insp. Guilherme Mello", "Esc. Jefferson Antoniol",
-            "Insp. Juliana Tremper", "Insp. Juliano Bonacina", "Esc. Luciana Bortoli",
-            "Insp. Lucas Loss", "Insp. Tais Boesing", "Insp. Teresinha Carivali",
-            "Insp. Thiago Meireles", "Insp. Thássia Guterres", "Insp. Vanessa Trindade"
+            "Insp. Acauã",
+            "Insp. Alexandre Brozoza",
+            "Esc. Anderson Saraiva",
+            "Esc. Cátia Fortunato",
+            "Esc. César da Costa",
+            "Insp. Cristiano Soletti",
+            "Esc. Dagoberto O. das Virgens",
+            "Insp. Edmilson Melo",
+            "Insp. Edna Moraes",
+            "Esc. Fernanda Piazza",
+            "Insp. Guilherme Mello",
+            "Esc. Jefferson Antoniol",
+            "Insp. Juliana Tremper",
+            "Insp. Juliano Bonacina",
+            "Insp. Lucas Loss",
+            "Esc. Luciana Bortoli",
+            "Insp. Tais Boesing",
+            "Insp. Teresinha Carivali",
+            "Insp. Thássia Guterres",
+            "Insp. Thiago Meireles",
+            "Insp. Vanessa Trindade"
         ];
 
         const schedule = {
@@ -610,7 +624,6 @@
         };
 
         function getTodayBrasilia() {
-            // Horário de Brasília (UTC-3)
             const now = new Date();
             const offset = -3;
             const brasiliaTime = new Date(now.getTime() + offset * 60 * 60 * 1000);
@@ -644,10 +657,26 @@
             contents[index].classList.add('active');
             buttons[index].classList.add('active');
 
-            // Restaurar a data última selecionada em todas as abas
+            // Restaurar data em todas as abas
             if (lastSelectedDate) {
                 document.getElementById('date-select').value = lastSelectedDate;
                 document.getElementById('swap-date-select').value = lastSelectedDate;
+            }
+
+            // Se clicar na aba de Trocas e houver data selecionada, carregar automaticamente
+            if (index === 2 && lastSelectedDate) {
+                loadSwapOptions();
+            }
+
+            // Se voltar para Data ou Trocas, mostrar o texto da última data
+            if ((index === 0 || index === 2) && lastSelectedDate) {
+                document.getElementById('output').value = buildMessage(lastSelectedDate);
+            }
+
+            // Se clicar em Pessoa, limpar o textarea
+            if (index === 1) {
+                document.getElementById('output').value = '';
+                document.getElementById('person-select').value = '';
             }
         }
 
@@ -697,7 +726,10 @@
 
         function searchByPerson() {
             const personFull = document.getElementById('person-select').value;
-            if (!personFull) return;
+            if (!personFull) {
+                document.getElementById('output').value = '';
+                return;
+            }
             
             const personShort = peopleShortMap[personFull];
             let result = '';
@@ -818,7 +850,6 @@
             lastSelectedDate = null;
         }
 
-        // Inicializar com a data de hoje
         window.addEventListener('DOMContentLoaded', function() {
             const todayDate = getTodayBrasilia();
             if (schedule[todayDate]) {
