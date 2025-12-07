@@ -337,6 +337,8 @@
                     <option>29/12/2025</option>
                     <option>30/12/2025</option>
                     <option>31/12/2025</option>
+                    <option>01/01/2026</option>
+                    <option>02/01/2026</option>
                 </select>
             </div>
 
@@ -376,6 +378,7 @@
                             <option value="">-- Todos os meses --</option>
                             <option value="11">Novembro 2025</option>
                             <option value="12">Dezembro 2025</option>
+                            <option value="01">Janeiro 2026</option>
                         </select>
                     </div>
                 </div>
@@ -449,6 +452,8 @@
                     <option>29/12/2025</option>
                     <option>30/12/2025</option>
                     <option>31/12/2025</option>
+                    <option>01/01/2026</option>
+                    <option>02/01/2026</option>
                 </select>
 
                 <div class="swap-container" id="swap-options-container" style="display: none;">
@@ -665,16 +670,18 @@
             "19/12/2025": ["Cau", "Luciana", "Edna"],
             "20/12/2025": ["Cátia", "Teresinha", "Edna"],
             "21/12/2025": ["Cátia", "Teresinha", "Edna"],
-            "22/12/2025": ["Melo", "Thássia", "Edna"],
-            "23/12/2025": ["Piazza", "Bona", "Edna"],
-            "24/12/2025": ["César", "Teresinha", "Edna"],
-            "25/12/2025": ["Dago", "Cátia", "Edna"],
-            "26/12/2025": ["Jeff", "Vanessa", "Edna"],
+            "22/12/2025": ["Brozoza", "Teresinha", ""],
+            "23/12/2025": ["", "Gui Mello", ""],
+            "24/12/2025": ["Brozoza", "Teresinha", ""],
+            "25/12/2025": ["", "Gui Mello", ""],
+            "26/12/2025": ["Brozoza", "Teresinha", ""],
             "27/12/2025": ["Dago", "Melo", "Edna"],
             "28/12/2025": ["Dago", "Melo", "Edna"],
-            "29/12/2025": ["Cristiano", "Juliana", "Edna"],
-            "30/12/2025": ["Gui Mello", "Brozoza", "Edna"],
-            "31/12/2025": ["Brozoza", "Loss", "Edna"]
+            "29/12/2025": ["Cau", "Cátia", ""],
+            "30/12/2025": ["Jeff", "Cristiano", "Edna"],
+            "31/12/2025": ["Cau", "Cátia", ""],
+            "01/01/2026": ["Jeff", "Cristiano", "Edna"],
+            "02/01/2026": ["Cau", "Cátia", ""]
         };
 
         function getTodayBrasilia() {
@@ -709,7 +716,8 @@
         function getMonthName(month) {
             const months = {
                 "11": "Novembro",
-                "12": "Dezembro"
+                "12": "Dezembro",
+                "01": "Janeiro"
             };
             return months[month] || "";
         }
@@ -778,8 +786,17 @@
                 text += "Data: " + date + "\n\n";
             }
             
-            text += nome1 + "\n" + fone1 + "\n\n";
-            text += nome2 + "\n" + fone2 + "\n\n";
+            if (nome1 && fone1) {
+                text += nome1 + "\n" + fone1 + "\n\n";
+            } else if (nome1) {
+                text += nome1 + "\n\n";
+            }
+            
+            if (nome2 && fone2) {
+                text += nome2 + "\n" + fone2 + "\n\n";
+            } else if (nome2) {
+                text += nome2 + "\n\n";
+            }
             
             if (saNac && saNac !== "") {
                 const nomeNac = nameMap[saNac];
@@ -820,6 +837,7 @@
             let result = '';
             let novCount = 0;
             let decCount = 0;
+            let janCount = 0;
             let datesFound = [];
 
             for (let date in schedule) {
@@ -834,6 +852,8 @@
                         novCount++;
                     } else if (date.includes("/12/")) {
                         decCount++;
+                    } else if (date.includes("/01/")) {
+                        janCount++;
                     }
                 }
             }
@@ -853,9 +873,10 @@
                 summaryDiv.style.display = 'block';
             } else {
                 // Mostrar resumo de todos os meses
-                result += "Novembro: " + novCount + " sobreavisos\n";
-                result += "Dezembro: " + decCount + " sobreavisos\n\n";
-                result += "════════════════════════════════════════\n\n";
+                if (novCount > 0) result += "Novembro: " + novCount + " sobreavisos\n";
+                if (decCount > 0) result += "Dezembro: " + decCount + " sobreavisos\n";
+                if (janCount > 0) result += "Janeiro: " + janCount + " sobreavisos\n";
+                result += "\n════════════════════════════════════════\n\n";
                 summaryDiv.style.display = 'none';
             }
 
@@ -884,8 +905,8 @@
 
             const [sa01Short, sa02Short, saNacShort] = escala;
             const names = [];
-            names[0] = nameMap[sa01Short];
-            names[1] = nameMap[sa02Short];
+            names[0] = nameMap[sa01Short] || "(Vazio)";
+            names[1] = nameMap[sa02Short] || "(Vazio)";
             if (saNacShort && saNacShort !== "") {
                 names[2] = nameMap[saNacShort];
             } else {
