@@ -694,12 +694,12 @@
             let escala = schedule[date];
             if (!escala || escala.length < 2) return "";
 
-            let [dayOfWeek, sa01, sa02, saNac] = escala;
+            let [dayOfWeek, sa01, sa02, sa03] = escala;
 
             if (swaps) {
                 if (swaps[0]) sa01 = peopleShortMap[swaps[0]];
                 if (swaps[1]) sa02 = peopleShortMap[swaps[1]];
-                if (swaps[2]) saNac = peopleShortMap[swaps[2]];
+                if (swaps[2]) sa03 = peopleShortMap[swaps[2]];
             }
 
             const nome1 = nameMap[sa01];
@@ -727,11 +727,11 @@
                 text += nome2 + "\n\n";
             }
 
-            if (saNac && saNac !== "") {
-                const nomeNac = nameMap[saNac];
-                const foneNac = phoneMap[saNac];
-                if (nomeNac && foneNac) {
-                    text += "NAC: " + nomeNac + "\n" + foneNac + "\n\n";
+            if (sa03 && sa03 !== "") {
+                const nome3 = nameMap[sa03];
+                const fone3 = phoneMap[sa03];
+                if (nome3 && fone3) {
+                    text += nome3 + "\n" + fone3 + "\n\n";
                 }
             }
 
@@ -777,9 +777,9 @@
 
                 const sa01 = escala[1];
                 const sa02 = escala[2];
-                const saNac = escala[3];
+                const sa03 = escala[3];
 
-                if (sa01 === personShort || sa02 === personShort || saNac === personShort) {
+                if (sa01 === personShort || sa02 === personShort || sa03 === personShort) {
                     datesFound.push(date);
                     if (date.includes("/01/")) janCount++;
                     else if (date.includes("/02/")) fevCount++;
@@ -831,15 +831,15 @@
 
             const sa01Short = escala[1];
             const sa02Short = escala[2];
-            const saNacShort = escala[3];
+            const sa03Short = escala[3];
 
             const names = [];
             names[0] = nameMap[sa01Short] || "(Vazio)";
             names[1] = nameMap[sa02Short] || "(Vazio)";
-            if (saNacShort && saNacShort !== "") {
-                names[2] = nameMap[saNacShort];
+            if (sa03Short && sa03Short !== "") {
+                names[2] = nameMap[sa03Short];
             } else {
-                names[2] = "(Sem NAC neste dia)";
+                names[2] = "(Sem este dia)";
             }
 
             for (let i = 1; i <= 3; i++) {
