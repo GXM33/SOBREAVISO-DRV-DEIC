@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerador de Sobreaviso DRV/DEIC (Final v4)</title>
+    <title>Gerador de Sobreaviso DRV/DEIC (Final v5)</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: Arial, sans-serif; background: #f5f5f5; padding: 20px; color: #333; }
@@ -117,6 +117,7 @@
         const GViz_URL = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:json&gid=${GID}`;
 
         let schedule = {
+            // ABRIL
             "01/04/2026": ["quarta-feira", "VANESSA", "JEFF", "GUI MELLO"],
             "02/04/2026": ["quinta-feira", "DAGO", "TERESINHA", "BONA"],
             "03/04/2026": ["sexta-feira", "DAGO", "THIAGO", "PIAZZA"],
@@ -146,7 +147,39 @@
             "27/04/2026": ["segunda-feira", "CAU", "MELO", "VANESSA"],
             "28/04/2026": ["terça-feira", "CRISTIANO", "EDNA", "JULIANA"],
             "29/04/2026": ["quarta-feira", "DAGO", "CÁTIA", "LAURA"],
-            "30/04/2026": ["quinta-feira", "LOSS", "LUCIANA", "BROZOZA"]
+            "30/04/2026": ["quinta-feira", "LOSS", "LUCIANA", "BROZOZA"],
+            // MAIO
+            "01/05/2026": ["sexta-feira", "DAGO", "CÁTIA", "LAURA"],
+            "02/05/2026": ["sábado", "SARAIVA", "TERESINHA", "CÉSAR"],
+            "03/05/2026": ["domingo", "SARAIVA", "TERESINHA", "CÉSAR"],
+            "04/05/2026": ["segunda-feira", "BONA", "THIAGO", "PIAZZA"],
+            "05/05/2026": ["terça-feira", "VANESSA", "EDNA", "GUI MELLO"],
+            "06/05/2026": ["quarta-feira", "CAU", "MELO", "THÁSSIA"],
+            "07/05/2026": ["quinta-feira", "CRISTIANO", "EDNA", "JULIANA"],
+            "08/05/2026": ["sexta-feira", "SARAIVA", "TERESINHA", "CÉSAR"],
+            "09/05/2026": ["sábado", "BONA", "THIAGO", "PIAZZA"],
+            "10/05/2026": ["domingo", "BONA", "THIAGO", "PIAZZA"],
+            "11/05/2026": ["segunda-feira", "LOSS", "LUCIANA", "BROZOZA"],
+            "12/05/2026": ["terça-feira", "SARAIVA", "TERESINHA", "CÉSAR"],
+            "13/05/2026": ["quarta-feira", "BONA", "THIAGO", "PIAZZA"],
+            "14/05/2026": ["quinta-feira", "VANESSA", "DAGO", "GUI MELLO"],
+            "15/05/2026": ["sexta-feira", "CAU", "MELO", "THÁSSIA"],
+            "16/05/2026": ["sábado", "JULIANA", "EDNA", "GUI MELLO"],
+            "17/05/2026": ["domingo", "VANESSA", "EDNA", "GUI MELLO"],
+            "18/05/2026": ["segunda-feira", "CRISTIANO", "EDNA", "JULIANA"],
+            "19/05/2026": ["terça-feira", "DAGO", "CÁTIA", "LAURA"],
+            "20/05/2026": ["quarta-feira", "LOSS", "LUCIANA", "BROZOZA"],
+            "21/05/2026": ["quinta-feira", "SARAIVA", "TERESINHA", "BONA"],
+            "22/05/2026": ["sexta-feira", "CÉSAR", "THIAGO", "PIAZZA"],
+            "23/05/2026": ["sábado", "CAU", "MELO", "THÁSSIA"],
+            "24/05/2026": ["domingo", "CAU", "MELO", "THÁSSIA"],
+            "25/05/2026": ["segunda-feira", "VANESSA", "JEFF", "GUI MELLO"],
+            "26/05/2026": ["terça-feira", "CAU", "MELO", "THÁSSIA"],
+            "27/05/2026": ["quarta-feira", "CRISTIANO", "JEFF", "JULIANA"],
+            "28/05/2026": ["quinta-feira", "JEFF", "CÁTIA", "LAURA"],
+            "29/05/2026": ["sexta-feira", "LOSS", "LUCIANA", "BROZOZA"],
+            "30/05/2026": ["sábado", "CRISTIANO", "JEFF", "VANESSA"],
+            "31/05/2026": ["domingo", "CRISTIANO", "JEFF", "JULIANA"]
         };
 
         const namePhoneData = {
@@ -214,7 +247,7 @@
                 document.getElementById('sync-status').textContent = "ONLINE";
                 document.getElementById('sync-status').style.background = "#16a34a";
             } catch (e) {
-                console.log("Usando dados offline (Abril)");
+                console.log("Usando dados offline (Maio)");
                 document.getElementById('sync-status').textContent = "OFFLINE";
                 document.getElementById('sync-status').style.background = "#6b7280";
             }
