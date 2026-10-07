@@ -114,7 +114,27 @@
     <script>
         const SPREADSHEET_ID = '1JdkTcFj05rUPWcCbf_tWc5ym1U9EAmzmb4X2fBvM4LE';
         const GID = '2099896829';
-        const GViz_URL = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:json&gid=${GID}`;
+        // A planilha é a fonte principal: alterações publicadas nela entram no app
+        // automaticamente no próximo carregamento, sem editar este arquivo.
+        const GViz_URL = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:json&gid=${GID}&tq=${encodeURIComponent('select B,C,D,F,H where B is not null')}`;
+
+        const sheetNameAliases = {
+            "BONACINA": "BONA", "GUILHERME": "GUI MELLO", "EDMILSON": "MELO",
+            "THASSIA": "THÁSSIA", "JEFFERSON": "JEFF", "JUCINEIA": "JUCI",
+            "ACAUÃ": "CAU", "ACAU": "CAU", "CESAR": "CÉSAR", "CÉSAR": "CÉSAR",
+            "CRISTINA": "CRISTINA", "CRISTIANO": "CRISTIANO", "DAGOBERTO": "DAGO",
+            "CÁTIA": "CÁTIA", "EDNA": "EDNA", "GUI MELLO": "GUI MELLO",
+            "LAURA": "LAURA", "LOSS": "LOSS", "LUCIANA": "LUCIANA", "MELO": "MELO",
+            "PIAZZA": "PIAZZA", "SARAIVA": "SARAIVA", "TAIS": "TAIS",
+            "TERESINHA": "TERESINHA", "THIAGO": "THIAGO", "VANESSA": "VANESSA",
+            "JULIANA": "JULIANA", "BROZOZA": "BROZOZA", "DAGO": "DAGO",
+            "CAU": "CAU", "BONA": "BONA", "JEFF": "JEFF", "JUCI": "JUCI"
+        };
+
+        function normalizeSheetName(value) {
+            const key = String(value || '').trim().toUpperCase();
+            return sheetNameAliases[key] || key;
+        }
 
         let schedule = {
             // ABRIL
@@ -381,24 +401,15 @@
                 const text = await response.text();
                 const json = JSON.parse(text.substring(47, text.length - 2));
                 const rows = json.table.rows;
-                const cols = json.table.cols;
-                
-                let colMap = {};
-                cols.forEach((c, i) => {
-                    if (c.label === "Data") colMap.data = i;
-                    if (c.label === "Dia da Semana") colMap.dia = i;
-                    if (c.label === "SA 01") colMap.sa1 = i;
-                    if (c.label === "SA 02") colMap.sa2 = i;
-                    if (c.label === "SA 03") colMap.sa3 = i;
-                });
 
+                // A consulta acima retorna somente B, C, D, F e H, nesta ordem.
                 rows.forEach(r => {
-                    const date = r.c[colMap.data]?.f || r.c[colMap.data]?.v;
+                    const date = r.c[0]?.f || r.c[0]?.v;
                     if (date && date.includes('/')) {
-                        const day = r.c[colMap.dia]?.v || '';
-                        const sa1 = (r.c[colMap.sa1]?.v || '').trim().toUpperCase();
-                        const sa2 = (r.c[colMap.sa2]?.v || '').trim().toUpperCase();
-                        const sa3 = (r.c[colMap.sa3]?.v || '').trim().toUpperCase();
+                        const day = String(r.c[1]?.v || '').trim().toLowerCase();
+                        const sa1 = normalizeSheetName(r.c[2]?.v);
+                        const sa2 = normalizeSheetName(r.c[3]?.v);
+                        const sa3 = normalizeSheetName(r.c[4]?.v);
                         if (sa1) schedule[date] = [day, sa1, sa2, sa3];
                     }
                 });
